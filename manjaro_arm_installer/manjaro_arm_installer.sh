@@ -61,6 +61,7 @@ ar18.pacman.install bash wget git systemd dialog parted libarchive \
   binfmt-qemu-static openssl gawk dosfstools polkit btrfs-progs cryptsetup
   
 ar18.aur.install binfmt-qemu-static
+ar18.aur.install qemu-user-static-bin
 
 temp_dir="/tmp"
 
