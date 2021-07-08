@@ -67,10 +67,10 @@ temp_dir="/tmp"
 rm -rf "${temp_dir}/manjaro-arm-installer"
 cd "${temp_dir}"
 git clone https://gitlab.manjaro.org/manjaro-arm/applications/manjaro-arm-installer.git
-export CRYPT="y"
+export CRYPT="yes"
 ar18.script.execute_with_sudo chmod +x manjaro-arm-installer/manjaro-arm-installer
 # encryption not working workaround> https://archived.forum.manjaro.org/t/full-disk-encryption-with-luks-in-manjaro-arm-installer/139863/6
-ar18.script.execute_with_sudo sed -i 's/$CRYPT/y/g' "manjaro-arm-installer/manjaro-arm-installer"
+#ar18.script.execute_with_sudo sed -i 's/$CRYPT/y/g' "manjaro-arm-installer/manjaro-arm-installer"
 ar18.script.execute_with_sudo -E bash -x manjaro-arm-installer/manjaro-arm-installer
 
 ##################################SCRIPT_END###################################
