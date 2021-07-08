@@ -71,7 +71,7 @@ export CRYPT="y"
 ar18.script.execute_with_sudo chmod +x manjaro-arm-installer/manjaro-arm-installer
 # encryption not working workaround> https://archived.forum.manjaro.org/t/full-disk-encryption-with-luks-in-manjaro-arm-installer/139863/6
 ar18.script.execute_with_sudo sed -i 's/$CRYPT/y/g' "manjaro-arm-installer/manjaro-arm-installer"
-ar18.script.execute_with_sudo -E bash manjaro-arm-installer/manjaro-arm-installer
+ar18.script.execute_with_sudo -E bash -x manjaro-arm-installer/manjaro-arm-installer
 
 ##################################SCRIPT_END###################################
 # Restore environment
