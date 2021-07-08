@@ -61,10 +61,10 @@ ar18.pacman.install bash wget git systemd dialog parted libarchive \
   binfmt-qemu-static openssl gawk dosfstools polkit btrfs-progs cryptsetup \
   manjaro-arm-installer
   
-ar18.script.execute_with_sudo systemctl restart systemd-binfmt
-  
 ar18.aur.install binfmt-qemu-static
 ar18.aur.install qemu-user-static-bin
+  
+ar18.script.execute_with_sudo systemctl restart systemd-binfmt
 
 temp_dir="/tmp"
 
