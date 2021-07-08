@@ -1,4 +1,4 @@
-module_name="manajaro_arm_installer"
+module_name="manjaro_arm_installer"
 
 if [ ! -v user_name ]; then
   user_name="$(whoami)"
