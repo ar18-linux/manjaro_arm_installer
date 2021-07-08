@@ -56,11 +56,12 @@ ar18.script.import ar18.pacman.install
 
 ar18.script.obtain_sudo_password
 
-ar18.pacman.install bash wget git systemd dialog parted libarchive \
+ar18.pacman.install bash wget git systemd dialog parted libarchive qemu \
   binfmt-qemu-static openssl gawk dosfstools polkit btrfs-progs cryptsetup
 
 temp_dir="/tmp"
 
+rm "${temp_dir}/manjaro-arm-installer"
 cd "${temp_dir}"
 git clone https://gitlab.manjaro.org/manjaro-arm/applications/manjaro-arm-installer.git
 export CRYPT="y"
