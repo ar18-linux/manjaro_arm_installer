@@ -61,7 +61,7 @@ ar18.pacman.install bash wget git systemd dialog parted libarchive qemu \
 
 temp_dir="/tmp"
 
-rm "${temp_dir}/manjaro-arm-installer"
+rm -rf "${temp_dir}/manjaro-arm-installer"
 cd "${temp_dir}"
 git clone https://gitlab.manjaro.org/manjaro-arm/applications/manjaro-arm-installer.git
 export CRYPT="y"
