@@ -53,11 +53,14 @@
 ar18.script.import ar18.script.obtain_sudo_password
 ar18.script.import ar18.script.execute_with_sudo
 ar18.script.import ar18.pacman.install
+ar18.script.import ar18.aur.install
 
 ar18.script.obtain_sudo_password
 
-ar18.pacman.install bash wget git systemd dialog parted libarchive qemu \
+ar18.pacman.install bash wget git systemd dialog parted libarchive \
   binfmt-qemu-static openssl gawk dosfstools polkit btrfs-progs cryptsetup
+  
+ar18.aur.install binfmt-qemu-static
 
 temp_dir="/tmp"
 
@@ -66,7 +69,7 @@ cd "${temp_dir}"
 git clone https://gitlab.manjaro.org/manjaro-arm/applications/manjaro-arm-installer.git
 export CRYPT="y"
 ar18.script.execute_with_sudo chmod +x manjaro-arm-installer/manjaro-arm-installer
-ar18.script.execute_with_sudo -E manjaro-arm-installer/manjaro-arm-installer
+ar18.script.execute_with_sudo -E bash manjaro-arm-installer/manjaro-arm-installer
 
 ##################################SCRIPT_END###################################
 # Restore environment
