@@ -1,0 +1,8 @@
+module_name="manajaro_arm_installer"
+
+if [ ! -v user_name ]; then
+  user_name="$(whoami)"
+fi
+if [ ! -v ar18_install_dir ]; then
+  install_dir="/opt/ar18"
+fi
