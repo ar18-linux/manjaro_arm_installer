@@ -69,13 +69,36 @@ ar18.script.execute_with_sudo systemctl restart systemd-binfmt
 temp_dir="/tmp"
 
 rm -rf "${temp_dir}/manjaro-arm-installer"
-cd "${temp_dir}"
-git clone https://gitlab.manjaro.org/manjaro-arm/applications/manjaro-arm-installer.git
-export CRYPT="yes"
-ar18.script.execute_with_sudo chmod +x manjaro-arm-installer/manjaro-arm-installer
+cp "${script_dir}/original_script.sh" "${temp_dir}/manjaro_install.sh"
+
+. "${script_dir}/config/vars"
+
+#cd "${temp_dir}"
+#git clone https://gitlab.manjaro.org/manjaro-arm/applications/manjaro-arm-installer.git
+#export CRYPT="yes"
+ar18.script.execute_with_sudo sed -i 's/DEVICE=""/DEVICE="sdb"/g' "manjaro-arm-installer/manjaro-arm-installer"
+ar18.script.execute_with_sudo sed -i 's/EDITION=""/EDITION=""/g' "manjaro-arm-installer/manjaro-arm-installer"
+ar18.script.execute_with_sudo sed -i 's/USERGROUPS=""/USERGROUPS=""/g' "manjaro-arm-installer/manjaro-arm-installer"
+ar18.script.execute_with_sudo sed -i 's/FULLNAME=""/FULLNAME=""/g' "manjaro-arm-installer/manjaro-arm-installer"
+ar18.script.execute_with_sudo sed -i 's/PASSWORD=""/PASSWORD=""/g' "manjaro-arm-installer/manjaro-arm-installer"
+ar18.script.execute_with_sudo sed -i 's/CONFIRMPASSWORD=""/CONFIRMPASSWORD=""/g' "manjaro-arm-installer/manjaro-arm-installer"
+ar18.script.execute_with_sudo sed -i 's/CONFIRMROOTPASSWORD=""/CONFIRMROOTPASSWORD=""/g' "manjaro-arm-installer/manjaro-arm-installer"
+ar18.script.execute_with_sudo sed -i 's/ROOTPASSWORD=""/ROOTPASSWORD=""/g' "manjaro-arm-installer/manjaro-arm-installer"
+ar18.script.execute_with_sudo sed -i 's/SDCARD=""/SDCARD=""/g' "manjaro-arm-installer/manjaro-arm-installer"
+ar18.script.execute_with_sudo sed -i 's/SDTYP=""/SDTYP=""/g' "manjaro-arm-installer/manjaro-arm-installer"
+ar18.script.execute_with_sudo sed -i 's/SDDEV=""/SDDEV=""/g' "manjaro-arm-installer/manjaro-arm-installer"
+ar18.script.execute_with_sudo sed -i 's/DEV_NAME=""/DEV_NAME=""/g' "manjaro-arm-installer/manjaro-arm-installer"
+ar18.script.execute_with_sudo sed -i 's/FSTYPE=""/FSTYPE=""/g' "manjaro-arm-installer/manjaro-arm-installer"
+ar18.script.execute_with_sudo sed -i 's/TIMEZONE=""/TIMEZONE=""/g' "manjaro-arm-installer/manjaro-arm-installer"
+ar18.script.execute_with_sudo sed -i 's/LOCALE=""/LOCALE=""/g' "manjaro-arm-installer/manjaro-arm-installer"
+ar18.script.execute_with_sudo sed -i 's/HOSTNAME=""/HOSTNAME=""/g' "manjaro-arm-installer/manjaro-arm-installer"
+ar18.script.execute_with_sudo sed -i 's/CRYPT=""/CRYPT=""/g' "manjaro-arm-installer/manjaro-arm-installer"
+
+ar18.script.execute_with_sudo chmod +x "${temp_dir}/manjaro_install.sh"
+
 # encryption not working workaround> https://archived.forum.manjaro.org/t/full-disk-encryption-with-luks-in-manjaro-arm-installer/139863/6
 #ar18.script.execute_with_sudo sed -i 's/$CRYPT/y/g' "manjaro-arm-installer/manjaro-arm-installer"
-ar18.script.execute_with_sudo -E bash -x manjaro-arm-installer/manjaro-arm-installer
+ar18.script.execute_with_sudo -E bash -x "${temp_dir}/manjaro_install.sh"
 
 ##################################SCRIPT_END###################################
 # Restore environment
