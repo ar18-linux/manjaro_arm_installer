@@ -3,7 +3,13 @@
 
 # Prepare script environment
 {
-  # Script template version 2021-07-04_19:11:04
+  # Script template version 2021-07-06_08:05:30
+  # Get old shell option values to restore later
+  shopt -s inherit_errexit
+  IFS=$'\n' shell_options=($(shopt -op))
+  # Set shell options for this script
+  set -o pipefail
+  set -eux
   # Make sure some modification to LD_PRELOAD will not alter the result or outcome in any way
   LD_PRELOAD_old="${LD_PRELOAD}"
   LD_PRELOAD=
@@ -31,14 +37,8 @@
     declare -A -g ar18_pwd_map
   fi
   ar18_pwd_map["${script_path}"]="${PWD}"
-  # Get old shell option values to restore later
-  shopt -s inherit_errexit
-  IFS=$'\n' shell_options=($(shopt -op))
-  # Set shell options for this script
-  set -o pipefail
-  set -eu
   if [ ! -v ar18_parent_process ]; then
-    export ar18_parent_process="$"
+    export ar18_parent_process="$$"
   fi
   # Get import module
   if [ ! -v ar18.script.import ]; then
@@ -59,15 +59,15 @@ ar18.script.install "${install_dir}" "${module_name}" "${script_dir}"
 ##################################SCRIPT_END###################################
 # Restore environment
 {
-  # Restore old shell values
   set +x
-  for option in "${shell_options[@]}"; do
-    eval "${option}"
-  done
   # Restore LD_PRELOAD
   LD_PRELOAD="${LD_PRELOAD_old}"
   # Restore PWD
   cd "${ar18_pwd_map["${script_path}"]}"
+  # Restore old shell values
+  for option in "${shell_options[@]}"; do
+    eval "${option}"
+  done
 }
 # Return or exit depending on whether the script was sourced or not
 {
